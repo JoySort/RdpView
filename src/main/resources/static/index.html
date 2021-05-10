@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>connect</title>
+
+    <style>
+        .label {
+            color: white;
+            padding: 8px;
+            font-family: Arial;
+        }
+        .success {background-color: #04AA6D;} /* Green */
+        .info {background-color: #2196F3;} /* Blue */
+        .warning {background-color: #ff9800;} /* Orange */
+        .danger {background-color: #f44336;} /* Red */
+        .other {background-color: #e7e7e7; color: black;} /* Gray */
+    </style>
+</head>
+<body>
+
+<form action="/connect" method="post">
+    <span class="label success">
+        <label >输入RDP的账号和密码</label>
+    <label for="username">username:</label>
+    <input type="text" id="username" name="username" value="joysort">
+    <label for="password">password:</label>
+    <input  id="password" name="password" value="" required type="password">
+<span class="label success"><input type="submit" value="Submit"></span>
+
+    </span> <br>
+    <br>
+    <span class="label danger"><b>以下如果不清楚干什么用的，可以不用修改</b></span><br><br>
+    <span class="label info">
+    <label for="ip">ip:</label><input type="text" id="ip" name="ip" value="127.0.0.1" >
+    <label for="port">port:</label><input type="text" id="port" name="port" value="3389" ><br><br>
+    <label for="width">width:</label><input type="text" id="width" name="width" value="1440" >
+    <label for="height">height:</label><input type="text" id="height" name="height" value="900" >
+        <input  id="gateway" name="gateway" value="127.0.0.1" type="hidden"><br></span>
+    <br><br><br>
+
+</form>
+
+<script>
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const gateway = urlParams.get('gateway')
+    console.log(gateway);
+    if(gateway != null ){
+        document.getElementById("gateway").value = gateway;
+    }
+
+    const ip = urlParams.get('ip')
+    console.log(ip);
+    if(ip != null ){
+        document.getElementById("ip").value = ip;
+    }
+
+    const port = urlParams.get('port')
+    console.log(port);
+    if(port != null ){
+        document.getElementById("port").value = port;
+    }
+
+    const width = urlParams.get('width')
+    console.log(width);
+    if(width != null ){
+        document.getElementById("width").value = width;
+    }else{
+        document.getElementById("width").value = window.innerWidth-16
+    }
+
+    const height = urlParams.get('height')
+    console.log(height);
+    if(height != null ){
+        document.getElementById("height").value = height;
+    }else{
+        document.getElementById("height").value =window.innerHeight-16;
+    }
+
+</script>
+</body>
+</html>

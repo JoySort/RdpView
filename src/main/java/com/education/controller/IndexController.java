@@ -26,10 +26,11 @@ public class IndexController {
                         @RequestParam(name = "ip") String ip,
                         @RequestParam(name = "port") String port,
                         @RequestParam(name = "width") String width,
-                        @RequestParam(name = "heigh") String heigh,
+                        @RequestParam(name = "height") String height,
+                        @RequestParam(name = "gateway") String gateway,
                         Map<String,Object> map) {
-        String base_url = String.format("/rdpview/%s&%s&%s&%s&%s&%s",
-                ip,port,username,password,width,heigh);
+        String base_url = String.format("/rdpview/%s&%s&%s&%s&%s&%s&%s",
+                ip,port,username,password,width,height,gateway);
         map.put("base_url",base_url);
         return "guacamole";
     }

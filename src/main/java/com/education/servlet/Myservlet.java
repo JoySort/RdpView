@@ -44,17 +44,22 @@ public class Myservlet extends GuacamoleHTTPTunnelServlet {
             config.setParameter("password", info.get(3));
             config.setParameter("width",info.get(4));
             config.setParameter("height",info.get(5));
+            String gateway=info.get(6);
+            if(gateway==null || gateway.equals("")){
+                gateway="127.0.0.1";
+            }
             // 在windows 机器下，默认的安全远程连接方式:仅允许运行使用网路级别身份验证的远程桌面的计算机连接(更安全) 若不将认证模式改为NLA
             //网络级验证（network level authentication NLA）是提供给远程桌面连接的一种新安全验证机制，可以在终端桌面连接及登录画面出现前预先完成用户验证程序，由于提前验证部分仅需要使用到较少的网络资源，因此可以有效防范黑客与恶意程序的攻击，同时降低阻断服务攻击(Dos)的机会。
 
             config.setParameter("security","nla");
             // 忽略证书验证，否则guaced 会报错
             config.setParameter("ignore-cert","true");
+            config.setParameter("color-depth","8");
 
             // Connect to guacd - everything is hard-coded here.
             GuacamoleSocket socket = new ConfiguredGuacamoleSocket(
                     // Todo 学习Servlet 整合springboot 将配置放在yml中，之前一直未成功
-                    new InetGuacamoleSocket("127.0.0.1", 4822),
+                    new InetGuacamoleSocket(gateway, 4822),
                     config
             );
 
